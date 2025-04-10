@@ -1,4 +1,4 @@
-# 代码审查报告生成器
+# 代码审查报告生成器 (Code Review Report Generator)
 
 这是一个将JSON格式的代码审查数据转换为HTML报告的工具。
 
@@ -107,7 +107,7 @@ python generate_schema.py
         "description": "确保没有使用未初始化的指针",
         "passed": true
       },
-      ...
+      //...
     ]
   },
   "findings": [
@@ -119,7 +119,7 @@ python generate_schema.py
       "description": "...",
       "recommendation": "..."
     },
-    ...
+    //...
   ]
 }
 ```
@@ -162,4 +162,4 @@ python test_checklist_validation.py
 
 ## 许可证
 
-Apache-2.0 
+Apache-2.0
