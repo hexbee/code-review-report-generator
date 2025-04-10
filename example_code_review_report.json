@@ -1,0 +1,214 @@
+{
+  "title": "Code Review Report",
+  "meta": {
+    "commit": "6be21d97aea8ee4eb13249f6c9609a7121ee67fa",
+    "author": "开发者姓名",
+    "email": "dev@example.com",
+    "date": "Wed Apr 2 09:33:19 2025 +0800"
+  },
+  "commit_message": "示例提交信息：修复了XYZ功能的Bug",
+  "main_changes": [
+    "修改了A模块中的数据处理逻辑",
+    "更新了B组件的错误处理机制",
+    "优化了C函数的性能"
+  ],
+  "checklist": {
+    "items": [
+      {
+        "id": 1,
+        "description": "确保没有使用未初始化的指针或未检查有效性的可选变量",
+        "passed": true
+      },
+      {
+        "id": 2,
+        "description": "验证没有使用已移动的对象",
+        "passed": true
+      },
+      {
+        "id": 3,
+        "description": "防止使用未初始化的变量",
+        "passed": true
+      },
+      {
+        "id": 4,
+        "description": "检查数组和向量的越界访问",
+        "passed": true
+      },
+      {
+        "id": 5,
+        "description": "确保没有数据截断问题（如u32转u8），必要时使用gsl::narrow",
+        "passed": false
+      },
+      {
+        "id": 6,
+        "description": "避免在迭代过程中使用无效迭代器",
+        "passed": true
+      },
+      {
+        "id": 7,
+        "description": "不在基于范围的循环中删除元素",
+        "passed": false
+      },
+      {
+        "id": 8,
+        "description": "确保存储在容器中的迭代器在插入或删除前有效",
+        "passed": true
+      },
+      {
+        "id": 9,
+        "description": "验证lambda中捕获的引用和this在lambda执行时保持有效",
+        "passed": true
+      },
+      {
+        "id": 10,
+        "description": "注册回调时确保对象在回调执行期间保持存活",
+        "passed": true
+      },
+      {
+        "id": 11,
+        "description": "确保多线程环境中共享数据的正确锁定",
+        "passed": true
+      },
+      {
+        "id": 12,
+        "description": "使用适当的锁：必要时使用写锁，避免过度使用写锁",
+        "passed": false
+      },
+      {
+        "id": 13,
+        "description": "验证库函数是否会抛出异常并确保正确处理",
+        "passed": true
+      },
+      {
+        "id": 14,
+        "description": "考虑在传播异常前进行内部异常处理以回滚资源",
+        "passed": true
+      },
+      {
+        "id": 15,
+        "description": "避免直接使用std::get，优先使用std::get_if或带检查的std::visit",
+        "passed": true
+      },
+      {
+        "id": 16,
+        "description": "在循环中修改元素时正确使用auto&",
+        "passed": true
+      },
+      {
+        "id": 17,
+        "description": "验证非const引用返回值的auto&使用",
+        "passed": true
+      },
+      {
+        "id": 18,
+        "description": "避免在引用中忘记&导致意外复制",
+        "passed": true
+      },
+      {
+        "id": 19,
+        "description": "确保新请求的正确并发处理",
+        "passed": true
+      },
+      {
+        "id": 20,
+        "description": "确认状态机正确处理异常事件",
+        "passed": true
+      },
+      {
+        "id": 21,
+        "description": "验证状态退出时正确注销响应消息和停止定时器",
+        "passed": true
+      },
+      {
+        "id": 22,
+        "description": "注册响应消息时设置定时器并在状态机中处理定时器过期",
+        "passed": true
+      },
+      {
+        "id": 23,
+        "description": "避免在状态转换中消息发送成功前提前返回",
+        "passed": true
+      },
+      {
+        "id": 24,
+        "description": "验证空容器的std::all_of、std::any_of、std::none_of结果",
+        "passed": false
+      },
+      {
+        "id": 25,
+        "description": "确认需要时输入容器已排序",
+        "passed": true
+      },
+      {
+        "id": 26,
+        "description": "确保std::copy、std::transform时正确调整大小或使用std::back_inserter",
+        "passed": true
+      },
+      {
+        "id": 27,
+        "description": "防止使用insert或emplace覆盖std::map中的键，使用insert_or_assign代替",
+        "passed": true
+      },
+      {
+        "id": 28,
+        "description": "防止用来自不同目标的消息数据覆盖类成员",
+        "passed": true
+      },
+      {
+        "id": 29,
+        "description": "根据规范验证条件，避免双重否定",
+        "passed": true
+      },
+      {
+        "id": 30,
+        "description": "确保在比较前正确检查IPv4/IPv6存在性",
+        "passed": true
+      },
+      {
+        "id": 31,
+        "description": "鼓励在不同上下文中使用通用函数处理重复逻辑",
+        "passed": false
+      },
+      {
+        "id": 32,
+        "description": "在解引用前验证指针（包括智能指针）和optional的有效性",
+        "passed": true
+      },
+      {
+        "id": 33,
+        "description": "避免直接记录敏感数据",
+        "passed": true
+      },
+      {
+        "id": 34,
+        "description": "确保不记录未初始化/null指针或optional值",
+        "passed": true
+      },
+      {
+        "id": 35,
+        "description": "在打印前正确转换U8变量以避免字符误解",
+        "passed": false
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "P001",
+      "category": "可维护性",
+      "severity": "medium",
+      "location": "/path/to/FileA.cpp:123",
+      "description": "A模块中的处理逻辑使用了复杂的嵌套条件，降低了代码可读性",
+      "recommendation": "考虑将复杂的条件判断提取为命名良好的辅助函数，使主逻辑更加清晰",
+      "reference": "omit"
+    },
+    {
+      "id": "P002",
+      "category": "测试",
+      "severity": "high",
+      "location": "/path/to/FileB.cpp:456",
+      "description": "B组件的错误处理缺少对边界情况的测试覆盖",
+      "recommendation": "添加针对输入为空和极端值的单元测试",
+      "reference": "TEST_F(BComponentTests, shouldHandleEmptyInput) {\n    BComponent component;\n    EXPECT_NO_THROW(component.process(\"\"));\n}"
+    }
+  ]
+} 

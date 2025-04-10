@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ data.title }}</h1>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <strong>提交:</strong>
+                    <code>{{ data.meta.commit }}</code>
+                </div>
+                <div class="meta-item">
+                    <strong>作者:</strong>
+                    <code>{{ data.meta.author }}</code>
+                </div>
+                {% if data.meta.email %}
+                <div class="meta-item">
+                    <strong>邮箱:</strong>
+                    <code>{{ data.meta.email }}</code>
+                </div>
+                {% endif %}
+                <div class="meta-item">
+                    <strong>日期:</strong>
+                    <code>{{ data.meta.date }}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>提交信息</h2>
+            <div class="commit-message">{{ data.commit_message }}</div>
+        </div>
+
+        <div class="section">
+            <h2>主要变更</h2>
+            <ul>
+                {% for change in data.main_changes %}
+                <li>{{ change }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>代码审查清单 <span class="checklist-stats">
+                {{ data['checklist']['items'] | count_passed }}/{{ data['checklist']['items'] | length }}
+            </span></h2>
+            <div class="checklist">
+                {% if data.checklist %}
+                    {% for item in data['checklist']['items'] %}
+                    <div class="checklist-item {% if item.passed %}passed{% endif %}">
+                        <div class="number">{{ item.id }}</div>
+                        <span>{{ item.description }}</span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>发现的问题 <span class="issues-count">{{ data.findings | default([], true) | length }}</span></h2>
+            <div class="findings">
+                {% if data.findings %}
+                    {% for finding in data.findings %}
+                    <div class="finding-card">
+                        <div class="finding-header">
+                            <span class="finding-id">{{ finding.id }}</span>
+                            <div>
+                                <span class="finding-category" data-category="{{ finding.category }}">{{ finding.category }}</span>
+                                <span class="severity {{ finding.severity }}">{{ finding.severity | title }}</span>
+                            </div>
+                        </div>
+                        <div class="finding-location" data-file="{{ finding.location }}">
+                            {{ finding.location }}
+                            <button class="copy-button" onclick="copyToClipboard(this, '{{ finding.location }}')"></button>
+                        </div>
+                        <div class="finding-description">
+                            <strong>描述：</strong>{{ finding.description }}
+                        </div>
+                        <div class="finding-recommendation">
+                            <strong>建议：</strong>{{ finding.recommendation }}
+                        </div>
+                        {% if finding.reference != "omit" %}
+                        <div class="finding-reference">
+                            <strong>参考：</strong>
+                            <pre><code>{{ finding.reference }}</code></pre>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="footer">
+            Large Language Model can make mistakes, so be cautious.
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(button, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html> 

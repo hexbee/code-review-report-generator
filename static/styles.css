@@ -1,0 +1,554 @@
+/* 基础样式变量定义 */
+:root {
+    --primary-color: #3b82f6;
+    --secondary-color: #3b82f6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --critical-color: #dc2626;
+    --text-color: #1e293b;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --code-bg: #f8fafc;
+    --highlight-color: #dbeafe;
+    --meta-color: #64748b;
+}
+
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 页面基础样式 */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+/* 主容器样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+    padding: 2rem;
+}
+
+/* 页眉样式 */
+.header {
+    border-bottom: 2px solid var(--highlight-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* 标题样式 */
+.header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+}
+
+/* 标题下划线装饰 */
+.header h1:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* 元数据信息区域样式 */
+.meta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    margin-bottom: 1rem;
+    max-width: 600px;
+    margin-left: 0;
+    margin-right: auto;
+    font-size: 0.85rem;
+    color: var(--meta-color);
+    padding: 0.6rem;
+    text-align: left;
+}
+
+/* 元数据项样式 */
+.meta-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 最后一个元数据项移除底部边框 */
+.meta-item:last-child {
+    border-bottom: none;
+}
+
+/* 元数据标签样式 */
+.meta-item strong {
+    color: var(--meta-color);
+    font-weight: 500;
+    min-width: 80px;
+}
+
+/* 元数据代码样式 */
+.meta-item code {
+    background: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+    color: var(--meta-color);
+    font-weight: 400;
+    margin-left: 0.5rem;
+}
+
+/* 提交信息样式 */
+.commit-message {
+    background: var(--highlight-color);
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* 章节样式 */
+.section {
+    margin: 2rem 0;
+}
+
+/* 章节标题样式 */
+.section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--highlight-color);
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 清单统计样式 */
+.checklist-stats {
+    font-size: 0.9rem;
+    background-color: var(--warning-color);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+/* 清单网格布局 */
+.checklist {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+/* 清单项样式 */
+.checklist-item {
+    background: var(--highlight-color);
+    padding: 0.8rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+/* 已通过清单项样式 */
+.checklist-item.passed {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success-color);
+}
+
+/* 清单项悬停效果 */
+.checklist-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 清单项编号样式 */
+.checklist-item .number {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+    background: var(--primary-color);
+    color: white;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+/* 已通过清单项编号样式 */
+.checklist-item.passed .number {
+    background: var(--success-color);
+}
+
+/* 清单项文本样式 */
+.checklist-item span {
+    margin-left: 1.5rem;
+    font-size: 0.85rem;
+}
+
+/* 问题卡片网格布局 */
+.findings {
+    display: grid;
+    gap: 1rem;
+}
+
+/* 问题卡片样式 */
+.finding-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 1rem;
+    transition: all 0.2s ease;
+}
+
+/* 问题卡片悬停效果 */
+.finding-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+    border-color: var(--primary-color);
+}
+
+/* 问题卡片头部样式 */
+.finding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+/* 问题卡片头部内容样式 */
+.finding-header > div {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* 问题ID样式 */
+.finding-id {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* 严重程度标签样式 */
+.severity {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+/* 严重程度 - 严重 */
+.severity.critical {
+    background: var(--critical-color);
+    color: white;
+}
+
+/* 严重程度 - 高 */
+.severity.high {
+    background: var(--danger-color);
+    color: white;
+}
+
+/* 严重程度 - 中 */
+.severity.medium {
+    background: var(--warning-color);
+    color: white;
+}
+
+/* 严重程度 - 低 */
+.severity.low {
+    background: var(--success-color);
+    color: white;
+}
+
+/* 问题类别标签样式 */
+.finding-category {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 问题类别图标 */
+.finding-category:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+/* 问题类别 - 可维护性 */
+.finding-category[data-category="可维护性"] {
+    color: #8b5cf6;
+    background-color: rgba(139, 92, 246, 0.1);
+}
+.finding-category[data-category="可维护性"]:before {
+    content: "\f085";
+    color: #8b5cf6;
+}
+
+/* 问题类别 - 测试 */
+.finding-category[data-category="测试"] {
+    color: #ec4899;
+    background-color: rgba(236, 72, 153, 0.1);
+}
+.finding-category[data-category="测试"]:before {
+    content: "\f1e6";
+    color: #ec4899;
+}
+
+/* 问题类别 - 设计 */
+.finding-category[data-category="设计"] {
+    color: #f97316;
+    background-color: rgba(249, 115, 22, 0.1);
+}
+.finding-category[data-category="设计"]:before {
+    content: "\f0eb";
+    color: #f97316;
+}
+
+/* 问题位置样式 */
+.finding-location {
+    font-family: monospace;
+    background: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+    color: var(--meta-color);
+    font-weight: 500;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 复制按钮样式 */
+.copy-button {
+    background: transparent;
+    border: none;
+    color: var(--meta-color);
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    width: 2rem;
+    height: 2rem;
+    justify-content: center;
+}
+
+/* 复制按钮悬停效果 */
+.copy-button:hover {
+    background: var(--highlight-color);
+    color: var(--primary-color);
+}
+
+/* 复制按钮图标 */
+.copy-button:before {
+    content: "\f0c5";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+/* 复制成功状态 */
+.copy-button.copied {
+    color: var(--warning-color);
+}
+
+/* 复制成功图标 */
+.copy-button.copied:before {
+    content: "\f00c";
+}
+
+/* 问题描述、建议和参考样式 */
+.finding-description, .finding-recommendation, .finding-reference {
+    margin-top: 0.5rem;
+    color: var(--text-color);
+}
+
+/* 问题描述、建议和参考中的强调文本 */
+.finding-description strong, .finding-recommendation strong, .finding-reference strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* 参考代码块样式 */
+.finding-reference pre {
+    background: var(--code-bg);
+    padding: 0.8rem;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    tab-size: 4;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* 参考代码内容样式 */
+.finding-reference pre code {
+    display: block;
+    color: var(--text-color);
+    counter-reset: line;
+    padding-left: 2.5rem;
+}
+
+/* 参考代码行号背景 */
+.finding-reference pre code::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-right: 1px solid var(--border-color);
+}
+
+/* 参考代码行样式 */
+.finding-reference pre code > span {
+    display: block;
+    position: relative;
+}
+
+/* 参考代码行号 */
+.finding-reference pre code > span::before {
+    counter-increment: line;
+    content: counter(line);
+    position: absolute;
+    left: -2.5rem;
+    width: 2rem;
+    text-align: right;
+    color: var(--meta-color);
+    font-size: 0.8rem;
+    padding-right: 0.5rem;
+}
+
+/* 语法高亮样式 */
+.token.keyword { color: #8954A8; font-weight: bold; }
+.token.function { color: #0C7BDC; }
+.token.class-name { color: #2B7489; }
+.token.string { color: #0C8A15; }
+.token.comment { color: #5C6370; font-style: italic; }
+.token.operator { color: #0550AE; }
+.token.punctuation { color: #5C6370; }
+.token.boolean { color: #C2185B; }
+.token.number { color: #C76B29; }
+
+/* 参考代码内联样式 */
+.finding-reference code {
+    background: transparent;
+    padding: 0;
+    font-weight: normal;
+}
+
+/* 通用代码样式 */
+code {
+    color: var(--primary-color);
+    background: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: 600;
+}
+
+/* 列表样式 */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* 列表项样式 */
+ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+/* 列表项标记 */
+ul li:before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* 打印样式 */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+    }
+    .finding-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* 问题计数标签样式 */
+.issues-count {
+    font-size: 0.9rem;
+    background-color: var(--meta-color);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+/* 页脚样式 */
+.footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--meta-color);
+    font-size: 0.9rem;
+} 
