@@ -138,7 +138,11 @@ class CodeReviewReport(BaseModel):
     commit_message: str = Field(..., description="The full commit message")
     main_changes: List[str] = Field(..., description="List of main changes in the commit")
     checklist: Checklist = Field(..., description="Code review checklist")
-    findings: List[Finding] = Field(..., description="List of findings or issues")
+    findings: List[Finding] = Field(
+        ..., 
+        description="List of findings or issues",
+        min_items=3
+    )
 
 
 # 使用示例
