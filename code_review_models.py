@@ -70,7 +70,12 @@ class ChecklistItem(BaseModel):
 
 
 class Checklist(BaseModel):
-    items: List[ChecklistItem] = Field(..., description="List of checklist items")
+    items: List[ChecklistItem] = Field(
+        ..., 
+        description="List of checklist items",
+        min_items=35,
+        max_items=35
+    )
     total: Optional[int] = Field(None, description="Total number of checklist items")
     passed: Optional[int] = Field(None, description="Number of passed checklist items")
     
